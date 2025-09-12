@@ -3,7 +3,7 @@
     "nombres": "Gabriel",
     "apellidos": "Moreno",
     "email": "gabriel.moreno@autonoma.edu.bo",
-    "password": "admin123",
+  "password": "admin123",
     "telefono": "70000001",
     "estado": "ACTIVO",
     "roles": ["ADMIN"]
@@ -12,7 +12,7 @@
     "nombres": "María",
     "apellidos": "Fernández",
     "email": "maria.fernandez@autonoma.edu.bo",
-    "password": "operador123",
+  "password": "operador123",
     "telefono": "70000002",
     "estado": "ACTIVO",
     "roles": ["OPERADOR"]
@@ -21,7 +21,7 @@
     "nombres": "Juan",
     "apellidos": "Pérez",
     "email": "juan.perez@autonoma.edu.bo",
-    "password": "cliente123",
+  "password": "cliente123",
     "telefono": "70000003",
     "estado": "ACTIVO",
     "roles": ["CLIENTE"]

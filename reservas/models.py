@@ -2,6 +2,11 @@ from django.db import models
 from core.models import TimeStampedModel
 from authz.models import Usuario
 from catalogo.models import Servicio
+
+from django.db import models
+from core.models import TimeStampedModel
+from authz.models import Usuario
+from catalogo.models import Servicio
 from cupones.models import Cupon
 
 class Reserva(TimeStampedModel):
@@ -12,7 +17,7 @@ class Reserva(TimeStampedModel):
     cupon = models.ForeignKey(Cupon, on_delete=models.SET_NULL, null=True, blank=True, related_name="reservas")
     total = models.DecimalField(max_digits=12, decimal_places=2)
     moneda = models.CharField(max_length=3, default="BOB")
-    class Meta:
+    class Meta(TimeStampedModel.Meta):
         indexes = [models.Index(fields=["usuario"]), models.Index(fields=["estado"])]
 
 class ReservaServicio(models.Model):
