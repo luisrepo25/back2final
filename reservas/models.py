@@ -1,28 +1,34 @@
 from django.db import models
 from core.models import TimeStampedModel
 from authz.models import Usuario
-from catalogo.models import Servicio
+# from catalogo.models import Servicio
 from cupones.models import Cupon
 
+# Modificar la clase Reserva para adaptarla
 class Reserva(TimeStampedModel):
-    ESTADO = (("PENDIENTE","PENDIENTE"),("PAGADA","PAGADA"),("CANCELADA","CANCELADA"),("REPROGRAMADA","REPROGRAMADA"))
+    ESTADO = (("PENDIENTE", "PENDIENTE"), ("PAGADA", "PAGADA"), ("CANCELADA", "CANCELADA"), ("REPROGRAMADA", "REPROGRAMADA"))
+    
     usuario = models.ForeignKey(Usuario, on_delete=models.RESTRICT, related_name="reservas")
     fecha_inicio = models.DateTimeField()
     estado = models.CharField(max_length=12, choices=ESTADO, default="PENDIENTE")
     cupon = models.ForeignKey(Cupon, on_delete=models.SET_NULL, null=True, blank=True, related_name="reservas")
     total = models.DecimalField(max_digits=12, decimal_places=2)
     moneda = models.CharField(max_length=3, default="BOB")
+    
     class Meta:
         indexes = [models.Index(fields=["usuario"]), models.Index(fields=["estado"])]
 
 class ReservaServicio(models.Model):
     reserva = models.ForeignKey(Reserva, on_delete=models.CASCADE, related_name="detalles")
-    servicio = models.ForeignKey(Servicio, on_delete=models.RESTRICT)
+    # servicio = models.ForeignKey(Servicio, on_delete=models.RESTRICT)  # Comentado
     cantidad = models.PositiveSmallIntegerField(default=1)
     precio_unitario = models.DecimalField(max_digits=12, decimal_places=2)
     fecha_servicio = models.DateTimeField(blank=True, null=True)
+
     class Meta:
-        unique_together = (("reserva","servicio"),)
+        # Definir correctamente unique_together como una tupla
+        unique_together = (("reserva",),)  # Esto es lo correcto
+
 
 class Visitante(TimeStampedModel):
     documento = models.CharField(max_length=50, unique=True)

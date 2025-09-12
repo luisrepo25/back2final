@@ -1,28 +1,31 @@
-from rest_framework import viewsets, permissions, filters
-from .models import Categoria, Servicio
-from .serializers import CategoriaSerializer, ServicioSerializer
+from rest_framework import viewsets
+from .models import Categoria
+from .serializers import CategoriaSerializer
 
 class CategoriaViewSet(viewsets.ModelViewSet):
-    queryset = Categoria.objects.all()
-    serializer_class = CategoriaSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Categoria.objects.all()  # Obtener todas las categorías
+    serializer_class = CategoriaSerializer  # Serializador a usar
 
-class ServicioViewSet(viewsets.ModelViewSet):
-    queryset = Servicio.objects.all()
-    serializer_class = ServicioSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ["titulo", "descripcion", "tipo"]
-    ordering_fields = ["costo", "created_at"]
+from rest_framework import viewsets
+from .models import Destino
+from .serializers import DestinoSerializer
 
-    def get_queryset(self):
-        qs = super().get_queryset()
-        if self.request.method == "GET":
-            qs = qs.filter(visible_publico=True)
-        categoria = self.request.query_params.get("categoria")
-        if categoria:
-            qs = qs.filter(categoria_id=categoria)
-        tipo = self.request.query_params.get("tipo")
-        if tipo:
-            qs = qs.filter(tipo=tipo)
-        return qs
+class DestinoViewSet(viewsets.ModelViewSet):
+    queryset = Destino.objects.all()  # Obtener todos los destinos
+    serializer_class = DestinoSerializer  # Serializador a usar
+
+from rest_framework import viewsets
+from .models import Itinerario
+from .serializers import ItinerarioSerializer
+
+class ItinerarioViewSet(viewsets.ModelViewSet):
+    queryset = Itinerario.objects.all()  # Obtener todos los itinerarios
+    serializer_class = ItinerarioSerializer  # Serializador a usar
+
+from rest_framework import viewsets
+from .models import Paquete
+from .serializers import PaqueteSerializer
+
+class PaqueteViewSet(viewsets.ModelViewSet):
+    queryset = Paquete.objects.all()  # Obtener todos los paquetes
+    serializer_class = PaqueteSerializer  # Serializador a usar
