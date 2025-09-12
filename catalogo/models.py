@@ -1,6 +1,6 @@
+
 from django.db import models
 from core.models import TimeStampedModel
-
 
 # Clase para representar la categoría del paquete
 class Categoria(models.Model):
@@ -9,11 +9,25 @@ class Categoria(models.Model):
     def __str__(self):
         return self.nombre
 
+# Modelo Servicio
+class Servicio(models.Model):
+    titulo = models.CharField(max_length=255)
+    descripcion = models.TextField(blank=True, default="")
+    tipo = models.CharField(max_length=100)
+    costo = models.DecimalField(max_digits=10, decimal_places=2)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="servicios")
+    visible_publico = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.titulo
+
 # Clase para representar el destino del paquete
 class Destino(TimeStampedModel):
     nombre = models.CharField(max_length=255)
     dias = models.IntegerField()
-    descripcion = models.TextField()
+    descripcion = models.TextField(default="")
 
     def __str__(self):
         return self.nombre

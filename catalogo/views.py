@@ -2,6 +2,9 @@ from rest_framework import viewsets, permissions, filters
 from .models import Categoria, Servicio
 from .serializers import CategoriaSerializer, ServicioSerializer
 
+from .models import Destino, Itinerario, Paquete
+from .serializers import DestinoSerializer, ItinerarioSerializer, PaqueteSerializer
+
 class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
@@ -26,3 +29,21 @@ class ServicioViewSet(viewsets.ModelViewSet):
         if tipo:
             qs = qs.filter(tipo=tipo)
         return qs
+
+# ViewSet para Destino
+class DestinoViewSet(viewsets.ModelViewSet):
+    queryset = Destino.objects.all()
+    serializer_class = DestinoSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+# ViewSet para Itinerario
+class ItinerarioViewSet(viewsets.ModelViewSet):
+    queryset = Itinerario.objects.all()
+    serializer_class = ItinerarioSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+# ViewSet para Paquete
+class PaqueteViewSet(viewsets.ModelViewSet):
+    queryset = Paquete.objects.all()
+    serializer_class = PaqueteSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]

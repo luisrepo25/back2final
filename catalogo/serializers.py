@@ -1,44 +1,33 @@
+
 from rest_framework import serializers
-from .models import Categoria
+from .models import Categoria, Servicio, Destino, Itinerario, Paquete
+
+class ServicioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Servicio
+        fields = "__all__"
+
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categoria
-        fields = "__all__"  # expone todos los campos del modelo
-
-from .models import Destino
+        fields = "__all__"
 
 class DestinoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destino
-        fields = "__all__"  # expone todos los campos del modelo
-
-from .models import Itinerario
+        fields = "__all__"
 
 class ItinerarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Itinerario
-        fields = "__all__"  # expone todos los campos del modelo
+        fields = "__all__"
 
-from .models import Paquete
-from .serializers import CategoriaSerializer, DestinoSerializer, ItinerarioSerializer
 
 class PaqueteSerializer(serializers.ModelSerializer):
-    # Relacionar la categoría (solo mostramos el nombre)
-    categoria = CategoriaSerializer(read_only=True)  # Mostrar categoría completa, no solo el id
-    # Relacionar destinos
-    destinos = DestinoSerializer(many=True, read_only=True)  # Destinos asociados al paquete
-    # Relacionar itinerarios
-    itinerario = ItinerarioSerializer(many=True, read_only=True)  # Itinerarios asociados al paquete
-    
+    categoria = CategoriaSerializer(read_only=True)
+    destinos = DestinoSerializer(many=True, read_only=True)
+    itinerario = ItinerarioSerializer(many=True, read_only=True)
     class Meta:
         model = Paquete
-        fields = "__all__"  # expone todos los campos del modelo
-
-from rest_framework import viewsets
-from .models import Paquete
-from .serializers import PaqueteSerializer
-
-class PaqueteViewSet(viewsets.ModelViewSet):
-    queryset = Paquete.objects.all()
-    serializer_class = PaqueteSerializer
+        fields = "__all__"

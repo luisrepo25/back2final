@@ -73,7 +73,6 @@ TIME_ZONE = "America/La_Paz"
 LANGUAGE_CODE = "es"
 USE_TZ = True
 
-
 # Database: Postgres en producción, SQLite en local
 if os.getenv("DATABASE_URL"):
     DATABASES = {
@@ -86,8 +85,6 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-
-
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
