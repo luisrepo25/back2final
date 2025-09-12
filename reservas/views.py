@@ -15,7 +15,7 @@ class ReservaViewSet(viewsets.ModelViewSet):
             return list(user.roles.values_list('nombre', flat=True))  # type: ignore
         return []
 
-    def get_queryset(self):  # type: ignore
+    def get_queryset(self):
         roles = self.get_user_roles()
         user = self.request.user
         if 'ADMIN' in roles or 'OPERADOR' in roles:
@@ -44,7 +44,6 @@ class ReservaViewSet(viewsets.ModelViewSet):
         if 'ADMIN' not in roles:
             raise PermissionDenied("Solo el rol ADMIN puede eliminar reservas.")
         instance.delete()
-    # ...existing code...
 
 class VisitanteViewSet(viewsets.ModelViewSet):
     queryset = Visitante.objects.all()

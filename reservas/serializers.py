@@ -39,8 +39,9 @@ class ReservaSerializer(serializers.ModelSerializer):
         read_only_fields = ["estado", "usuario"]
 
     def create(self, validated_data):
-        detalles = validated_data.pop("detalles", [])
-        reserva = Reserva.objects.create(**validated_data)
-        for d in detalles:
-            ReservaServicio.objects.create(reserva=reserva, **d)
+        detalles = validated_data.pop('detalles', [])
+        reserva = Reserva.objects.create(**validated_data)  # Creamos la reserva
+        # Aquí manejamos la creación de los detalles del servicio
+        for detalle in detalles:
+            ReservaServicio.objects.create(reserva=reserva, **detalle)
         return reserva

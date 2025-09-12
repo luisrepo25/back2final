@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Django
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.db-journal
+media/
+staticfiles/
+
+# VSCode
+.vscode/
+
+# Entornos virtuales
+venv/
+ENV/
+.env
+.env.*
+
+# Migraciones
+*/migrations/*
+!*/migrations/__init__.py
+
+# Otros
+.DS_Store
+Thumbs.db
