@@ -3,20 +3,21 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from authz.views import RolViewSet, UsuarioViewSet
-from catalogo.views import CategoriaViewSet, DestinoViewSet, ItinerarioViewSet, PaqueteViewSet
-from reservas.views import ReservaViewSet, VisitanteViewSet, ReservaVisitanteViewSet
+from catalogo.views import CategoriaViewSet, ServicioViewSet, DestinoViewSet, ItinerarioViewSet, PaqueteViewSet
+from reservas.views import ReservaViewSet, AcompananteViewSet, ReservaAcompananteViewSet
 # from cupones.views import CuponViewSet  # Commented out until CuponViewSet is implemented
 
 router = DefaultRouter()
 router.register(r"roles", RolViewSet)
 router.register(r"usuarios", UsuarioViewSet)
 router.register(r'categorias', CategoriaViewSet)
+router.register(r'servicios', ServicioViewSet)
 router.register(r'destinos', DestinoViewSet)
 router.register(r'itinerarios', ItinerarioViewSet)
 router.register(r'paquetes', PaqueteViewSet)
 router.register(r"reservas", ReservaViewSet)
-router.register(r"visitantes", VisitanteViewSet)
-router.register(r"reserva-visitantes", ReservaVisitanteViewSet)
+router.register(r"acompanantes", AcompananteViewSet)
+router.register(r"reserva-acompanantes", ReservaAcompananteViewSet)
 # router.register(r"cupones", CuponViewSet)  # Commented out until CuponViewSet is implemented
 
 urlpatterns = [

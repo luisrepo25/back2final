@@ -26,7 +26,7 @@ class ReservaServicio(models.Model):
     class Meta:
         unique_together = (("reserva", "servicio"),)
 
-class Visitante(TimeStampedModel):
+class Acompanante(TimeStampedModel):
     documento = models.CharField(max_length=50, unique=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
@@ -34,16 +34,23 @@ class Visitante(TimeStampedModel):
     nacionalidad = models.CharField(max_length=50, blank=True, null=True)
     email = models.EmailField(max_length=191, blank=True, null=True)
     telefono = models.CharField(max_length=25, blank=True, null=True)
+    class Meta(TimeStampedModel.Meta):
+        db_table = 'reservas_visitante'
 
-class ReservaVisitante(models.Model):
+class ReservaAcompanante(models.Model):
     ESTADO = (("CONFIRMADO","CONFIRMADO"),("CANCELADO","CANCELADO"))
-    reserva = models.ForeignKey(Reserva, on_delete=models.CASCADE, related_name="visitantes")
-    visitante = models.ForeignKey(Visitante, on_delete=models.RESTRICT, related_name="reservas")
+    reserva = models.ForeignKey(Reserva, on_delete=models.CASCADE, related_name="acompanantes")
+    acompanante = models.ForeignKey(
+        Acompanante,
+        on_delete=models.RESTRICT,
+        related_name="reservas_acompanantes",
+        db_column="visitante_id",
+    )
     estado = models.CharField(max_length=10, choices=ESTADO, default="CONFIRMADO")
     es_titular = models.BooleanField(default=False)
     # Garantiza un solo titular por reserva:
     class Meta:
-        unique_together = (("reserva","visitante"),)
+        unique_together = (("reserva","acompanante"),)
         constraints = [
             models.UniqueConstraint(
                 fields=["reserva"],
@@ -51,3 +58,4 @@ class ReservaVisitante(models.Model):
                 name="uq_un_titular_por_reserva",
             ),
         ]
+        db_table = 'reservas_reservavisitante'
