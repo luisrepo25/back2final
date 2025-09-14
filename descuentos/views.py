@@ -6,19 +6,20 @@ from .models import Descuento, ServicioDescuento
 from .serializers import DescuentoSerializer, ServicioDescuentoSerializer
 from django.db.models import Q
 from django.db import models
-
+from .permissions import IsOperadorOrReadOnly  # 👈 NUEVO
 
 class DescuentoViewSet(viewsets.ModelViewSet):
     queryset = Descuento.objects.all().order_by('-created_at')
     serializer_class = DescuentoSerializer
+    permission_classes = [IsOperadorOrReadOnly]       # 👈 NUEVO
 
 class ServicioDescuentoViewSet(viewsets.ModelViewSet):
     queryset = ServicioDescuento.objects.select_related('servicio','descuento').all()
     serializer_class = ServicioDescuentoSerializer
+    permission_classes = [IsOperadorOrReadOnly]       # 👈 NUEVO
 
 @decorators.api_view(["GET"])
 def precio_servicio(request, pk: int):
-    """Calcula precio final de un Servicio aplicando descuentos asociados, sin tocar catálogo."""
     try:
         servicio = Servicio.objects.get(pk=pk)
     except Servicio.DoesNotExist:
