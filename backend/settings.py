@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions","django.contrib.messages","django.contrib.staticfiles",
     "rest_framework","drf_spectacular",
     "core","authz","catalogo","reservas","cupones",
-    "corsheaders",
+    "corsheaders","descuentos", 
 ]
 
 MIDDLEWARE = [
