@@ -149,4 +149,8 @@ logs/
 
 # Backup files
 *.bak
+<<<<<<< HEAD
 *.backupvenv/
+=======
+*.backup
+>>>>>>> a69078113c6be130180df951c2e3056446f51b00
