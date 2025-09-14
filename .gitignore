@@ -149,4 +149,4 @@ logs/
 
 # Backup files
 *.bak
-*.backup
+*.backupvenv/
