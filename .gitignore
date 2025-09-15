@@ -151,3 +151,29 @@ logs/
 *.bak
 *.backupvenv/
 *.backup
+
+# Archivos específicos del proyecto de turismo
+database_schema.sql
+MIGRACION_DATABASE.md
+backup_*.sql
+*.dump
+
+# Archivos de configuración local
+local_settings.py
+.env.development
+.env.testing
+
+# Archivos temporales de migración
+migration_temp/
+backup_data/
+
+# Archivos de certificados y llaves
+*.pem
+*.key
+*.crt
+*.csr
+
+# Archivos de configuración de servidores
+nginx.conf
+apache.conf
+supervisor.conf
