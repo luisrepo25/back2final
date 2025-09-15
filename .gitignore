@@ -177,3 +177,10 @@ backup_data/
 nginx.conf
 apache.conf
 supervisor.conf
+db.sqlite3
+*.backup
+*.db
+__pycache__/
+*.pyc
+.env
+.env.*

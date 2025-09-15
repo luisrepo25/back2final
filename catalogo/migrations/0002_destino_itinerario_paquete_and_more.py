@@ -11,61 +11,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Destino',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('nombre', models.CharField(max_length=255)),
-                ('dias', models.IntegerField()),
-                ('descripcion', models.TextField(default='')),
-            ],
-            options={
-                'abstract': False,
-            },
-        ),
-        migrations.CreateModel(
-            name='Itinerario',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('dia', models.IntegerField()),
-                ('titulo', models.CharField(max_length=255)),
-                ('actividades', models.JSONField()),
-            ],
-            options={
-                'abstract': False,
-            },
-        ),
-        migrations.CreateModel(
-            name='Paquete',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('nombre', models.CharField(max_length=255)),
-                ('ubicacion', models.CharField(max_length=255)),
-                ('descripcion_corta', models.TextField()),
-                ('descripcion_completa', models.TextField()),
-                ('calificacion', models.DecimalField(decimal_places=1, max_digits=2)),
-                ('numero_reseñas', models.IntegerField()),
-                ('precio', models.CharField(max_length=100)),
-                ('precio_original', models.CharField(max_length=100)),
-                ('duracion', models.CharField(max_length=100)),
-                ('max_personas', models.IntegerField()),
-                ('dificultad', models.CharField(max_length=100)),
-                ('imagenes', models.JSONField()),
-                ('incluido', models.JSONField()),
-                ('no_incluido', models.JSONField()),
-                ('fechas_disponibles', models.JSONField()),
-                ('descuento', models.DecimalField(blank=True, decimal_places=2, max_digits=5, null=True)),
-            ],
-            options={
-                'abstract': False,
-            },
-        ),
+        # CreateModel operations for Destino, Itinerario and Paquete were
+        # removed because the initial migration (0001_initial.py) already
+        # defines those models. Keeping only field alterations and relation
+        # additions to avoid attempting to recreate existing tables.
         # Removed legacy index/field removals that conflict with the current
         # initial migration state. Those operations targeted fields that
         # are not present in `0001_initial.py` and caused project_state errors
@@ -101,19 +50,8 @@ class Migration(migrations.Migration):
             name='titulo',
             field=models.CharField(max_length=255),
         ),
-        migrations.AddField(
-            model_name='paquete',
-            name='categoria',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='catalogo.categoria'),
-        ),
-        migrations.AddField(
-            model_name='paquete',
-            name='destinos',
-            field=models.ManyToManyField(to='catalogo.destino'),
-        ),
-        migrations.AddField(
-            model_name='paquete',
-            name='itinerario',
-            field=models.ManyToManyField(to='catalogo.itinerario'),
-        ),
+        # Relationship fields for Paquete (categoria, destinos, itinerario)
+        # were already created in the initial migration (0001_initial.py).
+        # Removing AddField operations to prevent duplicate through-table
+        # creation (catalogo_paquete_destinos, catalogo_paquete_itinerario).
     ]
