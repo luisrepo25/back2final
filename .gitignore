@@ -149,6 +149,7 @@ logs/
 
 # Backup files
 *.bak
+*.backupvenv/
 *.backup
 
 # Archivos específicos del proyecto de turismo
