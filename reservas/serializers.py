@@ -353,6 +353,7 @@ class ReservaSerializer(serializers.ModelSerializer):
             # Eliminar asociaciones que no vinieron en el payload
             for rem in actuales.values():
                 rem.delete()
+                
 
             if titular_count > 1:
                 raise ValidationError({"acompanantes": "Solo puede haber un titular por reserva."})
