@@ -33,3 +33,4 @@ for name, M in models:
         print(f"{name}: {M.objects.count()}")
     except Exception as e:
         print(f"{name}: ERROR ->", e)
+        
